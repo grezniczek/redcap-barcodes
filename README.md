@@ -46,7 +46,7 @@ Apply this action tag to a field of type **Text Box** (no validation) only. If y
 
 This will **not** work for PDFs, emails, etc., but for form display only, as all the magic happens in the client's browser!
 
-Have a look at the QRCode EM if you need to include QR codes in other places than data entry forms and surveys.
+Have a look at the [QRCode EM](https://github.com/grezniczek/redcap-qrcode) if you need to include QR codes in other places than data entry forms and surveys.
 
 ## Changelog
 
