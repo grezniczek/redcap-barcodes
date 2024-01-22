@@ -100,7 +100,7 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
                         ];
                         for ($i = 1; $i < count($params); $i++) {
                             $p = trim($params[$i]);
-                            if (is_int($p)) {
+                            if (ctype_digit($p)) {
                                 $tag["size"] = $p * 1;
                             }
                             if ($p === "L") {
