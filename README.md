@@ -35,11 +35,12 @@ Add ` Text` (with a leading space) to any of the 1D barcodes to display the enco
 
 Separated by commas, optionally add the size (integer values only) and whether the barcode should act as a hyperlink (`L``; QR and DM only).
 
+EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details.
+
 Examples: 
 - `@BARCODE="Code 39 Text, 40` = Code 39 with text, text size 40px
 - `@BARCODE="QR, 100, L` = A somewhat reduced size QR code (default size = 128) that is a hyperlink
-
-EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details.
+- `@BARCODE="EAN-13` = A standard EAN-13 barcode. A valid example value would be 001234567890? or 0012345678905 (5 is the correct check digit)
 
 Apply this action tag to a field of type **Text Box** (no validation) only. If you want to have it editable on the page, use the `@BARCODE` on field with `@CALCTEXT` or `@CALCDATE`. If you need the barcode piped, use field embedding instead.
 
