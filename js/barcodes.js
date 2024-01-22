@@ -45,7 +45,7 @@ var DE_RUB_Barcodes;
         const id = 'barcodes-dm-' + tag.field;
         const $tb = $('input[name="' + tag.field + '"]');
         const text = '' + $tb.val();
-        const padding = 1;
+        const padding = 0;
         // Hide text box
         $tb.hide();
         // Hide "View equation" link
