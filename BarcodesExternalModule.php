@@ -34,9 +34,13 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
         $qr = false;
         foreach ($tags as $tag) {
             switch ($tag["type"]) {
-                case "QR": 
+                case "QR":
                     $js[] = $this->addQRCode($tag);
                     $qr = true;
+                    break;
+                case "DM":
+                    $js[] = $this->addDatamatrix($tag);
+                    $dm = true;
                     break;
             }
         }
@@ -45,6 +49,7 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
             require_once "classes/InjectionHelper.php";
             $ih = InjectionHelper::init($this);
             if ($qr) $ih->js("js/qrcode.min.js");
+            if ($dm) $ih->js("js/datamatrix.min.js");
             $ih->js("js/barcodes.js");
             print "<script>$(function() { " . join("; ", $js) . " });</script>";
         }
@@ -54,6 +59,12 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
         if (!isset($tag["size"])) $tag["size"] = 128;
         if (!isset($tag["link"])) $tag["link"] = false;
         return "DE_RUB_Barcodes.qr(".json_encode($tag).");";
+    }
+
+    private function addDatamatrix($tag) {
+        if (!isset($tag["size"])) $tag["size"] = 128;
+        if (!isset($tag["link"])) $tag["link"] = false;
+        return "DE_RUB_Barcodes.dm(".json_encode($tag).");";
     }
 
 
