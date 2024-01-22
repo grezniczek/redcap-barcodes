@@ -31,13 +31,31 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
      */
     private function injectJS($tags) {
         $js = [];
+        $qr = false;
         foreach ($tags as $tag) {
+            switch ($tag["type"]) {
+                case "QR": 
+                    $js[] = $this->addQRCode($tag);
+                    $qr = true;
+                    break;
+            }
         }
-		
+
         if (count($js)) {
+            require_once "classes/InjectionHelper.php";
+            $ih = InjectionHelper::init($this);
+            if ($qr) $ih->js("js/qrcode.min.js");
+            $ih->js("js/barcodes.js");
             print "<script>$(function() { " . join("; ", $js) . " });</script>";
         }
     }
+
+    private function addQRCode($tag) {
+        if (!isset($tag["size"])) $tag["size"] = 128;
+        if (!isset($tag["link"])) $tag["link"] = false;
+        return "DE_RUB_Barcodes.qr(".json_encode($tag).");";
+    }
+
 
     #endregion
 
@@ -63,10 +81,22 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
                     $misc = $Proj->metadata[$fieldName]["misc"];
                     preg_match_all($re, $misc, $matches, PREG_SET_ORDER, 0);
                     foreach ($matches as $match) {
-                        $tags[] = array(
+                        $s = $match["t"];
+                        $params = explode(",", $s);
+                        $tag = [ 
                             "field" => $fieldName,
-                            "type" => $match["t"],
-                        );
+                            "type" => trim($params[0])
+                        ];
+                        for ($i = 1; $i < count($params); $i++) {
+                            $p = trim($params[$i]);
+                            if (is_int($p)) {
+                                $tag["size"] = $p * 1;
+                            }
+                            if ($p === "L") {
+                                $tag["link"] = true;
+                            }
+                        }
+                        $tags[] = $tag;
                     }
                 }
             }
