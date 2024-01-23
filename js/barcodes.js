@@ -2,7 +2,8 @@ var DE_RUB_Barcodes;
 (function () {
     const barcodes = {
         qr: setupQRCode,
-        dm: setupDatamatrix
+        dm: setupDatamatrix,
+        code39: setupCode39
     }
     DE_RUB_Barcodes = barcodes;
     
@@ -82,6 +83,38 @@ var DE_RUB_Barcodes;
             if (tag.link) {
                 $(dmSpan).parent('a').attr('href', text);
             }
+        });
+    }
+
+    const code39Classes = {
+        true: {
+            false: 'barcodes-code-39-extended',
+            true: 'barcodes-code-39-extended-text'
+        },
+        false: {
+            false: 'barcodes-code-39',
+            true: 'barcodes-code-39-text'
+        }
+    }
+
+    function setupCode39(tag) {
+        const id = 'barcodes-c39-' + tag.field;
+        const $tb = $('input[name="' + tag.field + '"]');
+        const text = '' + $tb.val();
+        // Hide text box
+        $tb.hide();
+        // Hide "View equation" link
+        $tb.parent().parent().find('.viewEq').hide();
+        const span = document.createElement('span');
+        span.style.display = 'inline-block';
+        span.classList.add(tag.text ? 'barcodes-code-39-text' : 'barcodes-code-39');
+        span.style.fontSize = tag.size + 'px';
+        span.setAttribute('id', id);
+        span.textContent = '*'+text+'*';
+        $tb.before(span);
+        $('form#form').on('change', function() { 
+            const text = '' + $tb.val();
+            span.textContent = '*'+text+'*';
         });
     }
 })();

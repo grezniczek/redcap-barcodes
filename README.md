@@ -23,6 +23,7 @@ A REDCap external module that transforms text fields to barcodes on data entry f
 
 where `Type` is one of:
 - `Code 39` 
+- `Code 39 Extended` 
 - `Code 128`
 - `EAN-8`
 - `EAN-13`, optionally add `+2` or `+5` for the 2-/5-digit addon
@@ -35,7 +36,7 @@ Add ` Text` (with a leading space) to any of the 1D barcodes to display the enco
 
 Separated by commas, optionally add the size (integer values only) and whether the barcode should act as a hyperlink (`L``; QR and DM only).
 
-EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details.
+EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details. For the intricacies of Code 39 vs. Code 39 Extended, see [this article](https://graphicore.github.io/librebarcode/documentation/code39.html). For more info on Code 128, see [this article](https://graphicore.github.io/librebarcode/documentation/code128.html).
 
 Examples: 
 - `@BARCODE="Code 39 Text, 40` = Code 39 with text, text size 40px
