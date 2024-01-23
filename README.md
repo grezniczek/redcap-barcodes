@@ -10,12 +10,17 @@ A REDCap external module that transforms text fields to barcodes on data entry f
 
 ## Requirements
 
-- REDCAP 14.0.0 or newer
+- REDCap 14.0.0 or newer
 
 ## Configuration
 
 - There are no module-specific system or project configuration options.
 - All action is controlled by the .... action tags ;)
+
+## Use case
+
+Whenever you want to _display_ a barcode on a data entry forms or survey pages, this is the right module for the job ;)
+
 
 ## Action Tags
 
@@ -33,7 +38,7 @@ Add ` Text` (with a leading space) to any of the 1D barcodes to display the enco
 
 Separated by commas, optionally add the size (integer values only)and whether the barcode should act as a hyperlink (`L`; QR and DM only). The default sizes are 48 for Code 39 and Code 128, and 128 for EAN/UPC and the 2D barcodes, respectively.
 
-Apply this action tag to a field of type **Text Box** (no validation) only. If you want to have it editable on the page, use the `@BARCODE` on field with `@CALCTEXT` or `@CALCDATE`. If you need the barcode piped, use field embedding instead.
+Apply this action tag to a field of type **Text Box** only. The barcode will be shown instead of the input element. If you want to have the field editable on the page, use the `@BARCODE` action tag on a different field that "pipes" in the value with `@CALCTEXT` or `@CALCDATE`. If you need the barcode piped to some place, use the field embedding feature.
 
 EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details, and the examples below.
 
@@ -64,11 +69,6 @@ EAN-13+2 | DDDDDDDDDDDD?DD | 001234567890?12
 EAN-13+2 | DDDDDDDDDDDDDDD | 001234567890512 
 EAN-13+5 | DDDDDDDDDDDD?DDDDD | 001234567890?12345 
 EAN-13+5 | DDDDDDDDDDDDDDDDDD | 001234567890512345 
-
-
-## Use case
-
-- Whenever you want to _display_ a barcode on a data entry forms or survey pages.
 
 ## Notes & Limitations
 
