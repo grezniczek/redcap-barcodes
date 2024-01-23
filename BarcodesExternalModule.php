@@ -2,6 +2,10 @@
 
 class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
 
+    /**
+     * The name of the action tag provided by this module
+     * @var string
+     */
     private $at = "@BARCODES";
 
     #region Hooks
@@ -31,7 +35,7 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
      */
     private function injectJS($tags) {
         $js = [];
-        $qr = $dm = false;
+        $qr = $dm = $c128 = false;
         $fonts = [];
         foreach ($tags as $tag) {
             switch ($tag["type"]) {
@@ -53,6 +57,16 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
                     $js[] = $this->addCode39($tag);
                     $fonts[$tag["text"] ? "Code39ExtendedText" : "Code39Extended"] = true;
                     break;
+                case "Code 128":
+                    $js[] = $this->addCode128($tag);
+                    $c128 = true;
+                    $fonts[$tag["text"] ? "Code128Text" : "Code128"] = true;
+                    break;
+                case "EAN/UPC":
+                    $tag["text"] = true;
+                    $js[] = $this->addEAN13($tag);
+                    $fonts["EAN13Text"] = true;
+                    break;
             }
         }
 
@@ -63,8 +77,9 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
             foreach ($fonts as $font => $_) {
                 $ih->css("css/$font.css", false);
             }
-            if ($qr) $ih->js("js/qrcode.min.js");
-            if ($dm) $ih->js("js/datamatrix.min.js");
+            if ($qr) $ih->js("js/qrcode.min.js", true);
+            if ($dm) $ih->js("js/datamatrix.min.js", true);
+            if ($c128) $ih->js("js/code-128-encoder.min.js", true);
             $ih->js("js/barcodes.js");
             print "<script>$(function() { " . join("; ", $js) . " });</script>";
         }
@@ -85,6 +100,16 @@ class BarcodesExternalModule extends \ExternalModules\AbstractExternalModule {
     private function addCode39($tag) {
         if (!isset($tag["size"])) $tag["size"] = 48;
         return "DE_RUB_Barcodes.code39(".json_encode($tag).");";
+    }
+
+    private function addCode128($tag) {
+        if (!isset($tag["size"])) $tag["size"] = 48;
+        return "DE_RUB_Barcodes.code128(".json_encode($tag).");";
+    }
+
+    private function addEAN13($tag) {
+        if (!isset($tag["size"])) $tag["size"] = 128;
+        return "DE_RUB_Barcodes.ean13(".json_encode($tag).");";
     }
 
 

@@ -3,7 +3,9 @@ var DE_RUB_Barcodes;
     const barcodes = {
         qr: setupQRCode,
         dm: setupDatamatrix,
-        code39: setupCode39
+        code39: setupCode39,
+        code128: setupCode128,
+        ean13: setupEAN13
     }
     DE_RUB_Barcodes = barcodes;
     
@@ -46,7 +48,7 @@ var DE_RUB_Barcodes;
         const id = 'barcodes-dm-' + tag.field;
         const $tb = $('input[name="' + tag.field + '"]');
         const text = '' + $tb.val();
-        const padding = 0;
+        const padding = 1;
         // Hide text box
         $tb.hide();
         // Hide "View equation" link
@@ -107,7 +109,7 @@ var DE_RUB_Barcodes;
         $tb.parent().parent().find('.viewEq').hide();
         const span = document.createElement('span');
         span.style.display = 'inline-block';
-        span.classList.add(tag.text ? 'barcodes-code-39-text' : 'barcodes-code-39');
+        span.classList.add(code39Classes[tag.extended][tag.text]);
         span.style.fontSize = tag.size + 'px';
         span.setAttribute('id', id);
         span.textContent = '*'+text+'*';
@@ -115,6 +117,72 @@ var DE_RUB_Barcodes;
         $('form#form').on('change', function() { 
             const text = '' + $tb.val();
             span.textContent = '*'+text+'*';
+        });
+    }
+
+
+    function setupCode128(tag) {
+        const id = 'barcodes-c128-' + tag.field;
+        const $tb = $('input[name="' + tag.field + '"]');
+        const text = '' + $tb.val();
+        const encoder = new Code128Generator();
+        // Hide text box
+        $tb.hide();
+        // Hide "View equation" link
+        $tb.parent().parent().find('.viewEq').hide();
+        const span = document.createElement('span');
+        span.style.display = 'inline-block';
+        span.classList.add(tag.text ? 'barcodes-code-128-text' : 'barcodes-code-128');
+        span.style.fontSize = tag.size + 'px';
+        span.setAttribute('id', id);
+        span.textContent = encoder.encode(text);
+        $tb.before(span);
+        $('form#form').on('change', function() { 
+            const text = '' + $tb.val();
+            span.textContent = encoder.encode(text);
+        });
+    }
+    function setupCode128(tag) {
+        const id = 'barcodes-c128-' + tag.field;
+        const $tb = $('input[name="' + tag.field + '"]');
+        const text = '' + $tb.val();
+        const encoder = new Code128Generator();
+        // Hide text box
+        $tb.hide();
+        // Hide "View equation" link
+        $tb.parent().parent().find('.viewEq').hide();
+        const span = document.createElement('span');
+        span.style.display = 'inline-block';
+        span.classList.add(tag.text ? 'barcodes-code-128-text' : 'barcodes-code-128');
+        span.style.fontSize = tag.size + 'px';
+        span.setAttribute('id', id);
+        span.textContent = encoder.encode(text);
+        $tb.before(span);
+        $('form#form').on('change', function() { 
+            const text = '' + $tb.val();
+            span.textContent = encoder.encode(text);
+        });
+    }
+
+
+    function setupEAN13(tag) {
+        const id = 'barcodes-ean13-' + tag.field;
+        const $tb = $('input[name="' + tag.field + '"]');
+        const text = '' + $tb.val();
+        // Hide text box
+        $tb.hide();
+        // Hide "View equation" link
+        $tb.parent().parent().find('.viewEq').hide();
+        const span = document.createElement('span');
+        span.style.display = 'inline-block';
+        span.classList.add('barcodes-ean-13-text');
+        span.style.fontSize = tag.size + 'px';
+        span.setAttribute('id', id);
+        span.textContent = text;
+        $tb.before(span);
+        $('form#form').on('change', function() { 
+            const text = '' + $tb.val();
+            span.textContent = text;
         });
     }
 })();
