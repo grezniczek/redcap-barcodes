@@ -13,7 +13,7 @@
             "institution": "Ruhr-Universität Bochum"
         }
     ],
-    "framework-version": 12,
+    "framework-version": 14,
     "action-tags": [
         {
             "tag": "@BARCODES",
@@ -24,11 +24,5 @@
     "system-settings": [
     ],
     "project-settings": [
-    ],
-    "compatibility": {
-        "php-version-min": "7.4.0",
-        "php-version-max": "",
-        "redcap-version-min": "14.0.0",
-        "redcap-version-max": ""
-     }
+    ]
 }
