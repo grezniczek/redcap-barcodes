@@ -15,7 +15,7 @@ A REDCap external module that transforms text fields to barcodes on data entry f
 ## Configuration
 
 - There are no module-specific system or project configuration options.
-- All action is controlled by the .... action tags ;)
+- All action is controlled by ... the action tag ;)
 
 ## Use case
 
@@ -24,7 +24,7 @@ Whenever you want to _display_ a barcode on a data entry forms or survey pages, 
 
 ## Action Tags
 
-`@BARCODE="Type"`
+`@BARCODES="Type"`
 
 where `Type` is one of:
 - `Code 39` 
@@ -38,16 +38,16 @@ Add ` Text` (with a leading space) to any of the 1D barcodes to display the enco
 
 Separated by commas, optionally add the size (integer values only)and whether the barcode should act as a hyperlink (`L`; QR and DM only). The default sizes are 48 for Code 39 and Code 128, and 128 for EAN/UPC and the 2D barcodes, respectively.
 
-Apply this action tag to a field of type **Text Box** only. The barcode will be shown instead of the input element. If you want to have the field editable on the page, use the `@BARCODE` action tag on a different field that "pipes" in the value with `@CALCTEXT` or `@CALCDATE`. If you need the barcode piped to some place, use the field embedding feature.
+Apply this action tag to a field of type **Text Box** only. The barcode will be shown instead of the input element. If you want to have the field editable on the page, use the `@BARCODES` action tag on a different field that "pipes" in the value with `@CALCTEXT` or `@CALCDATE`. If you need the barcode piped to some place, use the field embedding feature.
 
 EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replaces with a `?`. Check [here](https://graphicore.github.io/librebarcode/documentation/ean13#ean13-encoder) for details, and the examples below.
 
 For the intricacies of Code 39 vs. Code 39 Extended, see [this article](https://graphicore.github.io/librebarcode/documentation/code39.html). For more info on Code 128, see [this article](https://graphicore.github.io/librebarcode/documentation/code128.html).
 
 Examples: 
-- `@BARCODE="Code 39 Text, 40"` = Code 39 with text, text size 40px
-- `@BARCODE="QR, 100, L"` = A somewhat reduced size QR code (default size = 128) that is a hyperlink
-- `@BARCODE="EAN/UPC"` = EAN-8, EAN-13, UPC-A, UPC-E barcodes with otional addons. The check digit can be replaces with `?`. 
+- `@BARCODES="Code 39 Text, 40"` = Code 39 with text, text size 40px
+- `@BARCODES="QR, 100, L"` = A somewhat reduced size QR code (default size = 128) that is a hyperlink
+- `@BARCODES="EAN/UPC"` = EAN-8, EAN-13, UPC-A, UPC-E barcodes with otional addons. The check digit can be replaces with `?`. 
 
 Here is a list of valid EAN/UPC example values (D = a digit):
 
@@ -80,4 +80,5 @@ Have a look at the [QRCode EM](https://github.com/grezniczek/redcap-qrcode) if y
 
 Version | Description
 ------- | ------------------
+v1.0.1  | Fix misspelled action tag in the README.<br>Bump Framework version to 14.
 v1.0.0  | Initial release.
