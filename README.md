@@ -45,9 +45,9 @@ EAN/UPC barcodes must be valid codes. Optionally, the check digit can be replace
 For the intricacies of Code 39 vs. Code 39 Extended, see [this article](https://graphicore.github.io/librebarcode/documentation/code39.html). For more info on Code 128, see [this article](https://graphicore.github.io/librebarcode/documentation/code128.html).
 
 Examples: 
-- `@BARCODE="Code 39 Text, 40` = Code 39 with text, text size 40px
-- `@BARCODE="QR, 100, L` = A somewhat reduced size QR code (default size = 128) that is a hyperlink
-- `@BARCODE="EAN/UPC` = EAN-8, EAN-13, UPC-A, UPC-E barcodes with otional addons. The check digit can be replaces with `?`. 
+- `@BARCODE="Code 39 Text, 40"` = Code 39 with text, text size 40px
+- `@BARCODE="QR, 100, L"` = A somewhat reduced size QR code (default size = 128) that is a hyperlink
+- `@BARCODE="EAN/UPC"` = EAN-8, EAN-13, UPC-A, UPC-E barcodes with otional addons. The check digit can be replaces with `?`. 
 
 Here is a list of valid EAN/UPC example values (D = a digit):
 
