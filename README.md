@@ -80,5 +80,6 @@ Have a look at the [QRCode EM](https://github.com/grezniczek/redcap-qrcode) if y
 
 Version | Description
 ------- | ------------------
+v1.0.2  | Add missing fonts.
 v1.0.1  | Fix misspelled action tag in the README.<br>Bump Framework version to 14.
 v1.0.0  | Initial release.
