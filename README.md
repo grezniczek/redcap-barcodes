@@ -5,7 +5,7 @@ A REDCap external module that transforms text fields to barcodes on data entry f
 ## Installation
 
 - Clone this repo into `<redcap-root>/modules/redcap_barcodes_<version-number>`, or
-- Obtain this module from the Consortium [REDCap Repo](https://redcap.vanderbilt.edu/consortium/modules/index.php) via the Control Center.
+- Obtain this module from the Consortium [REDCap Repo](https://redcap.vumc.org/consortium/modules/index.php) via the Control Center.
 - Go to _Control Center > Technical / Developer Tools > External Modules_ and enable **Barcodes**.
 
 ## Requirements
@@ -80,5 +80,6 @@ Have a look at the [QRCode EM](https://github.com/grezniczek/redcap-qrcode) if y
 
 Version | Description
 ------- | ------------------
-v1.0.1  | Fix misspelled action tag in the README.<br>Bump Framework version to 14.
-v1.0.0  | Initial release.
+ 1.0.2  | Fix Repository link in README 
+ 1.0.1  | Fix misspelled action tag in the README.<br>Bump Framework version to 14.
+ 1.0.0  | Initial release.
